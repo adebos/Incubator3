@@ -1,0 +1,419 @@
+@import "settings";
+
+// fonts
+//$PTSans: 'PT Sans', sans-serif;
+
+
+//
+//оформление надписей
+//@include font-type ($color, $font-family, $font-size, $font-weight, $line-height, $letter-spacing)
+
+
+// colors
+$light: #dcdcdc;
+$white: #ffffff;
+$gray: #696969;
+$text: #767676;
+
+
+// GLOBAL SECTION
+html, body {min-width: 980px;}
+.app {
+	@include font-type ($text, $PTSans, 14px, 400, 22px, normal);
+	display: flex; flex-direction: column; min-height: 100%; margin: 0 auto;
+}
+//wrappers
+.wr-header, .menu ul, .content, .wr-footer, .breadcrubs {
+	width: 980px; padding: 0 10px; margin: 0 auto;
+}
+//all link
+a {
+	color: #ffffff; text-decoration: underline;
+
+    &:hover {text-decoration: none;}
+    &:active {}
+    &:after {}
+}
+//height hack
+.rasporka {flex: 1;}
+// preloader
+.preloader {}
+// line
+.line {border-bottom: 1px solid $gray;}
+
+
+
+// APPLICATION
+
+//section header
+.header {
+	color: $gray;
+	padding: 35px 0;
+    background-color: $light;
+
+    .wr-header {
+    	display: flex;
+    	align-items: center;
+
+    	//brand block
+	    .brand {
+	    	flex-basis: 32%;
+
+	    	img.logo {float: left; margin-right: 15px;}
+	    	p.title {
+	    		font-size: 34px; line-height: 27px;
+	    		margin-bottom: 15px; margin-top: 5px;
+	    	}
+	    	p.subtitle {}
+	    }
+	    //contact block
+	    .contacts {
+	    	ul {
+	    		li {
+	    			&:last-child {text-align: right;}
+
+	    			a {
+	    				@include font-type ($gray, $OpenSans, 40px, 400, 46px, normal); text-decoration: none;
+
+	    				&:hover {text-decoration: underline;}
+
+	    				&.link_modal {
+	    					@include font-type ($gray, $PTSans, 24px, 600, 46px, normal); text-decoration: none;
+	    					border-bottom: 1px dashed $gray;
+
+	    					&:hover {text-decoration: none; border-bottom: 1px solid $gray;}
+	    				}
+	    			}
+	    		}
+	    	}
+	    }
+	}
+}
+
+//section menu
+.menu {
+	font-size: 30px;
+	padding: 25px 0;
+	background-color: $gray;
+
+	ul {
+		display: flex; justify-content: center;
+
+		li {
+			padding: 0 20px;
+
+			a {
+				color: $white; text-decoration: none;
+
+				&:hover {text-decoration: underline;}
+			}
+		}
+		li + li {border-left: 2px solid $white;}
+	}
+}
+
+//section slider
+.slider {
+	width: 100%; height: 462px;
+
+	@keyframes anim_slides {
+		0% {opacity:0;}
+		8% {opacity:1;}
+		47% {opacity:1;}
+		55% {opacity:0;}
+		100% {opacity:0;}
+	}
+
+	.slides {
+		margin: 0px auto; height: 100%;
+		position: relative; overflow:hidden;
+
+		ul {
+			height: 100%;
+			position: relative;
+
+			li {
+				opacity:0;
+				position: absolute; top:0; left: 0; right: 0;
+
+				animation-name: anim_slides;
+				animation-duration: 8.0s;
+				animation-timing-function: linear;
+				animation-iteration-count: infinite;
+				animation-direction: normal;
+				animation-delay: 0;
+				animation-play-state: running;
+				animation-fill-mode: forwards;
+
+				&:nth-child(2) {
+					animation-delay: 4.0s;
+
+					.slide-image {
+						background: url("../img/slide2.png") center center no-repeat;
+					}
+				}
+				//slide
+				.slide-image {
+					height: 462px; margin: 0 auto;
+					background-size: cover;
+					background: url("../img/slide1.png") center center no-repeat;
+				}
+			}
+		}
+	}
+}
+
+//section breadcrubs
+.breadcrubs {
+	padding: 10px 0;
+
+	ul {
+		li {
+			display: inline-block;
+
+			&.active a {text-decoration: none;}
+			& + li {
+				a {
+					padding-left: 5px;
+
+					&:before {
+						content: "/";
+						padding-right: 10px;
+					}
+				}
+			}
+			a {
+				color: $text; text-decoration: underline;
+
+				&:hover {text-decoration: none;}
+			}
+		}
+	}
+}
+
+// main section content
+.content {
+	display: flex; padding: 15px 0 180px;
+
+    //category block left side
+    .category {
+    	min-width: 19%; margin-right: 20px;
+
+    	& > ul {
+    		font-size: 18px; line-height: 30px;
+    		margin-bottom: 115px;
+
+    		li {
+    			&.active > a {text-decoration: underline;}
+
+    			a {
+    				color: $text; text-decoration: none;
+
+    				&:hover {text-decoration: underline;}
+    			}
+    			ul {
+    				font-size: 14px; line-height: 22px; list-style: disc;
+    				padding-left: 20px;
+
+    				li {
+    					&.active > a {text-decoration: underline; font-weight: 600;}
+    					a {}
+    				}
+    			}
+    		}
+    	}
+    	//price list
+    	a.price_list {
+    		text-align: center; color: $text; font-size: 30px; line-height: 25px; font-weight: 600; text-decoration: none;
+    		display: block; margin: 0 auto;
+
+    		&:hover {text-decoration: underline;}
+
+    		img.price_img {display: block; margin: 0 auto;}
+    	}
+    }
+
+    //main block center side
+    //"shop" block
+    .shop {
+    	max-width: 79%;
+
+    	ul.products_list {
+    		display: flex; flex-wrap: wrap;
+
+    		li {
+    			max-width: 32%; padding: 19px; margin-right: 15px; margin-bottom: 20px;
+    			background-color: $light;
+
+    			&:nth-child(3n) {margin-right: 0;}
+
+    			a {
+    				display: block; margin-bottom: 5px;
+
+    				img {}
+    			}
+    			p {
+    				font-size: 18px;
+    				margin-bottom: 20px;
+    			}
+    			.pay_block {
+    				span.price {font-size: 28px; line-height: 18px;font-weight: 600;}
+    				a.pay {
+    					width: 28px; height: 21px; margin-right: 15px;
+    					background-image: url(../img/pay.png); background-repeat: no-repeat;
+    					float: right;
+    					transition: transform .3s ease-out;
+
+    					&:hover {transform: scale(1.1);}
+    				}
+
+    				&:after {@include float-clear;}
+    			}
+    		}
+    	}
+    	//pagination block
+    	.pagination {
+    		margin-bottom: 55px; padding: 10px 0;
+
+    		ul {
+    			text-align: center;
+
+    			li {
+    				display: inline-block;
+
+    				&.active a {
+    					font-size: 18px;
+
+    					&:hover {text-decoration: none;}
+    				}
+
+    				a {
+    					color: $text; text-decoration: none;
+    					padding: 0 10px;
+
+    					&:hover {text-decoration: underline;}
+    				}
+    			}
+    		}
+    	}
+	    //offers block
+	    .offers {
+	    	display: flex; padding: 35px 0 20px;
+
+	    	.offer {
+	    		flex: 1;
+
+	    		&:first-child {margin-right: 45px;}
+
+	    		p {}
+	    	}
+	    }
+	}
+}
+
+//section footer
+.footer {
+	color: #ffffff; letter-spacing: 0.25px;
+    padding: 50px 0;
+    background-color: $gray;
+
+	.wr-footer {
+		display: flex;
+
+		//footer block
+	    .footer_block {
+	    	flex: 1;
+
+	    	&:last-child {text-align: right;}
+
+	    	a.email {
+	    		text-decoration:none;
+
+	    		&:hover {text-decoration: underline;}
+	    	}
+	    	ul {
+	    		li {
+	    			a {}
+	    		}
+	    	}
+	    	img {margin-right: 10px;}
+	    	p.develop {
+	    		float: right; text-align: left;
+	    		&.copiright {}
+
+	    		a {}
+	    	}
+	    }
+	}
+}
+
+//section feedback
+.modal {
+	opacity: 0;
+	display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;
+	position: fixed; z-index: -1; top: 0; left: 0;
+	background: rgba(0,0,0,.3);
+	transition: opacity .3s linear;
+
+	&:target {
+		opacity: 1;
+		z-index: 100
+	}
+
+	& > div {
+		padding: 20px 65px;
+		position: relative;
+		background: #ffffff;
+
+		a.close {
+			color: $white; font-size: 40px; text-decoration: none;
+			top: -32px; right: -31px; padding: 5px;
+			position: absolute;
+			background-color: $text;
+
+			&:hover,
+			&:focus {color: $light;}
+		}
+		h2 {
+			font-size: 24px; font-weight: 600; text-transform: uppercase; text-align: center;
+			margin: 15px 0 40px;
+		}
+		form {
+			text-align: center;
+
+			div {
+				text-align: center;
+				position: relative;
+
+				p {}
+				input, textarea {
+					display: block; height: 42px; width: 340px; margin: 2px 0 12px; padding: 7px;
+					border: 1px solid #c3c3c3;
+
+					&:invalid {
+						border-color: #ff8383; box-shadow: inset 0px 0px 13px 0px rgba(255,131,131,1);
+
+						&:not(:focus) {border: 1px solid #c3c3c3;box-shadow:none;}
+						&:not(:focus):not(:placeholder-shown){border-color: #ff8383; box-shadow: inset 0px 0px 13px 0px rgba(255,131,131,1);}
+
+						&:focus + label {display: block;}
+						&:focus:not(:placeholder-shown) + label {display: none;}
+					}
+					&:valid {
+						& + label {display: none;}
+					}
+				}
+				textarea {height: auto;}
+				label {
+					color: #ff8383; font-style: italic; display: none;//opacity: 0;
+					position: absolute;	top: 33px; left: 10px;
+				}
+			}
+			button {
+				color: $white; font-size: 18px; font-weight: 600; text-transform: uppercase;
+				padding: 10px; margin-top: 10px;
+				background-color: $gray; border: none; cursor: pointer;
+			}
+		}
+	}
+}
